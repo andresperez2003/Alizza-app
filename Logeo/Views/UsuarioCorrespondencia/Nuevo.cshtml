@@ -1,0 +1,49 @@
+﻿@model Documento.Models.ViewModels.UsuarioCorrespondenciaViewModel
+
+@{
+    ViewBag.Title = "Nuevo Usuario y Correspondencia";
+}
+
+
+
+<h2>@ViewBag.Title</h2>
+
+<br />
+
+
+@using (Html.BeginForm("Nuevo", "UsuarioCorrespondencia", FormMethod.Post))
+{
+    <div class="row">
+
+        <div class="col-md-12">
+            <div>
+                @Html.LabelFor(d => d.ID)
+                @Html.TextBoxFor(d => d.ID, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.ID, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.NombreRazonSocial)
+                @Html.TextBoxFor(d => d.NombreRazonSocial, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.NombreRazonSocial, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Direccion)
+                @Html.TextBoxFor(d => d.Direccion, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Direccion, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.IDCiudad)<br />
+                @Html.EditorFor(d => d.IDCiudad, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.IDCiudad, null, new { @class = "red" })
+            </div>
+        </div>
+        <div style="text-align:right;">
+            <input type="submit" value="Guardar" class="btn btn-primary" style="background-color:#222; border-color:#222;" />
+        </div>
+
+
+
+
+    </div>
+
+}

@@ -1,0 +1,42 @@
+﻿@model Documento.Models.ViewModels.CiudadDptoViewModel
+
+@{
+    ViewBag.Title = "Editar";
+}
+
+
+
+<h2>@ViewBag.Title</h2>
+
+<br />
+
+
+@using (Html.BeginForm("Editar", "CiudadDpto", FormMethod.Post))
+{
+    <div class="row">
+
+        <div class="col-md-12">
+            <div>
+
+                @Html.LabelFor(d => d.IDCiudad)
+                @Html.TextBoxFor(d => d.IDCiudad, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.IDCiudad, null, new { @class = "red" })
+
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Ciudad)
+                @Html.TextBoxFor(d => d.Ciudad, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Ciudad, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Departamento)
+                @Html.TextBoxFor(d => d.Departamento, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Departamento, null, new { @class = "red" })
+            </div>
+
+        </div>
+        <div style="text-align:right;">
+            <input type="submit" value="Guardar" class="btn btn-primary" style="background-color:#222; border-color:#222;" />
+        </div>
+    </div>
+}

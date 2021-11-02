@@ -1,0 +1,41 @@
+﻿
+@model List<Documento.Models.ViewModels.ListDocEntrada>
+@{
+    ViewBag.Title = "Registro de Entrada de Documentos";
+}
+
+<br />
+<br />
+<h2>@ViewBag.Title</h2>
+
+<div class="row" style="text-align:right;padding:5px">
+    <a href="~/DocEntrada/Nuevo" class="btn btn-primary">Nuevo</a>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>Radicado</th>
+                <th>ID de Remitente </th>
+                <th>Fecha de Entrada</th>
+                <th></th>
+            </tr>
+            @foreach (var oElemento in Model)
+            {
+                <tr>
+                    <td>@oElemento.Radicado_Entrada</td>
+                    <td>@oElemento.ID_Remitente</td>
+                    <td>@oElemento.Fecha_Entrada</td>
+
+                    <td>
+                        <a class="btn btn-default" href="~/DocEntrada/Editar?radicado=@oElemento.Radicado_Entrada">Editar</a>
+                        <a class="btn btn-danger" href="~/DocEntrada/Eliminar?radicado=@oElemento.Radicado_Entrada">Eliminar</a>
+                    </td>
+                </tr>
+            }
+
+
+        </table>
+
+    </div>
+</div>

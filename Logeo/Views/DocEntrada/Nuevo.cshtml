@@ -1,0 +1,44 @@
+﻿@model Documento.Models.ViewModels.DocEntradaViewModel
+
+@{
+    ViewBag.Title = "Nuevo documento de Entrada";
+}
+
+
+
+<h2>@ViewBag.Title</h2>
+
+<br />
+
+
+@using (Html.BeginForm("Nuevo", "DocEntrada", FormMethod.Post))
+{
+    <div class="row">
+
+        <div class="col-md-12">
+            <div>
+                @Html.LabelFor(d => d.Radicado_Entrada)
+                @Html.TextBoxFor(d => d.Radicado_Entrada, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Radicado_Entrada, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.ID_Remitente)
+                @Html.TextBoxFor(d => d.ID_Remitente, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.ID_Remitente, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Fecha_Entrada)<br />
+                @Html.EditorFor(d => d.Fecha_Entrada, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Fecha_Entrada, null, new { @class = "red" })
+            </div>
+        </div>
+        <div style="text-align:right;">
+            <input type="submit" value="Guardar" class="btn btn-primary" style="background-color:#222; border-color:#222;" />
+        </div>
+
+
+
+
+    </div>
+
+}

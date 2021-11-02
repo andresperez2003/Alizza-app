@@ -1,0 +1,51 @@
+﻿@model Documento.Models.ViewModels.DocSalidaViewModel
+
+@{
+    ViewBag.Title = "Editar";
+}
+
+
+
+<h2>@ViewBag.Title</h2>
+
+<br />
+
+
+@using (Html.BeginForm("Editar", "List", FormMethod.Post))
+{
+    <div class="row">
+
+        <div class="col-md-12">
+            <div>
+
+                @Html.LabelFor(d => d.Radicado_Salida)
+                @Html.TextBoxFor(d => d.Radicado_Salida, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Radicado_Salida, null, new { @class = "red" })
+
+            </div>
+            <div>
+                @Html.LabelFor(d => d.ID_Destinatario)
+                @Html.TextBoxFor(d => d.ID_Destinatario, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.ID_Destinatario, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.ID_Dependencia)
+                @Html.TextBoxFor(d => d.ID_Dependencia, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.ID_Dependencia, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Fecha_Salida)
+                @Html.EditorFor(d => d.Fecha_Salida, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Fecha_Salida, null, new { @class = "red" })
+            </div>
+        </div>
+        <div style="text-align:right;">
+            <input type="submit" value="Guardar" class="btn btn-primary" style="background-color:#222; border-color:#222;" />
+        </div>
+
+
+
+
+    </div>
+
+}

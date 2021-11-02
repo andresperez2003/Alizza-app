@@ -1,0 +1,44 @@
+﻿@model Documento.Models.ViewModels.TablaViewModel
+
+@{
+    ViewBag.Title = "Nuevo";
+}
+
+
+
+<h2>@ViewBag.Title</h2>
+
+<br />
+
+
+@using (Html.BeginForm("Nuevo", "List", FormMethod.Post))
+{
+    <div class="row">
+
+        <div class="col-md-12">
+            <div>
+                @Html.LabelFor(d => d.Radicado)
+                @Html.TextBoxFor(d => d.Radicado, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Radicado, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Categoria)
+                @Html.TextBoxFor(d => d.Categoria, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Categoria, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Tipo)
+                @Html.TextBoxFor(d => d.Tipo, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Tipo, null, new { @class = "red" })
+            </div>
+        </div>
+        <div style="text-align:right;">
+            <input type="submit" value="Guardar" class="btn btn-primary" style="background-color:#222; border-color:#222;" />
+        </div>
+
+
+
+
+    </div>
+
+}

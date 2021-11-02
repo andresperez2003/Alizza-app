@@ -1,0 +1,42 @@
+﻿
+@model List<Documento.Models.ViewModels.ListCiudadDpto>
+@{
+    ViewBag.Title = "Registro de Ciudad y Departamento";
+}
+
+<br />
+<br />
+<h2>@ViewBag.Title</h2>
+
+<div class="row" style="text-align:right;padding:5px">
+    <a href="~/CiudadDpto/Nuevo" class="btn btn-primary">Nuevo</a>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>Radicado</th>
+                <th>Fecha de Salida</th>
+                <th>ID de Destinatario</th>
+                <th>ID de Dependencia</th>
+                <th></th>
+            </tr>
+            @foreach (var oElemento in Model)
+            {
+                <tr>
+                    <td>@oElemento.IDCiudad</td>
+                    <td>@oElemento.Ciudad</td>
+                    <td>@oElemento.Departamento</td>
+                    <td>
+                        <a class="btn btn-default" href="~/CiudadDpto/Editar?idCiudad=@oElemento.IDCiudad">Editar</a>
+                        <a class="btn btn-danger" href="~/CiudadDpto/Eliminar?idCiudad=@oElemento.IDCiudad">Eliminar</a>
+                    </td>
+                </tr>
+            }
+
+
+        </table>
+
+    </div>
+</div>
+

@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbCorrespondenciaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tabla">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="correo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="fecha_nacimiento" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblCiudadDpto">
+    <Key>
+      <PropertyRef Name="idCiudad" />
+    </Key>
+    <Property Name="idCiudad" Type="int" Nullable="false" />
+    <Property Name="ciudad" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="departamento" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblDependencia">
+    <Key>
+      <PropertyRef Name="idDependencia" />
+    </Key>
+    <Property Name="idDependencia" Type="int" Nullable="false" />
+    <Property Name="dependencia" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="nivel" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblDocEntrada">
+    <Key>
+      <PropertyRef Name="radicado" />
+    </Key>
+    <Property Name="radicado" Type="int" Nullable="false" />
+    <Property Name="fechaEntrada" Type="date" Nullable="false" />
+    <Property Name="idRemitente" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblDocSalida">
+    <Key>
+      <PropertyRef Name="radicado" />
+    </Key>
+    <Property Name="radicado" Type="int" Nullable="false" />
+    <Property Name="fechaSalida" Type="date" Nullable="false" />
+    <Property Name="idDestinatario" Type="int" Nullable="false" />
+    <Property Name="idDependencia" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblDocumento">
+    <Key>
+      <PropertyRef Name="radicado" />
+    </Key>
+    <Property Name="radicado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="categoria" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="tipo" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblUsuarioCorrespondencia">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="nombreRazonSocial" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="direccion" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="idCiudad" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_tblDocEntrada_tblDocumento">
+    <End Role="tblDocumento" Type="Self.tblDocumento" Multiplicity="1" />
+    <End Role="tblDocEntrada" Type="Self.tblDocEntrada" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tblDocumento">
+        <PropertyRef Name="radicado" />
+      </Principal>
+      <Dependent Role="tblDocEntrada">
+        <PropertyRef Name="radicado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblDocEntrada_tblUsuarioCorrespondencia">
+    <End Role="tblUsuarioCorrespondencia" Type="Self.tblUsuarioCorrespondencia" Multiplicity="1" />
+    <End Role="tblDocEntrada" Type="Self.tblDocEntrada" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUsuarioCorrespondencia">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblDocEntrada">
+        <PropertyRef Name="idRemitente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblDocSalida_tblDependencia">
+    <End Role="tblDependencia" Type="Self.tblDependencia" Multiplicity="1" />
+    <End Role="tblDocSalida" Type="Self.tblDocSalida" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDependencia">
+        <PropertyRef Name="idDependencia" />
+      </Principal>
+      <Dependent Role="tblDocSalida">
+        <PropertyRef Name="idDependencia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblDocSalida_tblDocumento">
+    <End Role="tblDocumento" Type="Self.tblDocumento" Multiplicity="1" />
+    <End Role="tblDocSalida" Type="Self.tblDocSalida" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tblDocumento">
+        <PropertyRef Name="radicado" />
+      </Principal>
+      <Dependent Role="tblDocSalida">
+        <PropertyRef Name="radicado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblDocSalida_tblUsuarioCorrespondencia">
+    <End Role="tblUsuarioCorrespondencia" Type="Self.tblUsuarioCorrespondencia" Multiplicity="1" />
+    <End Role="tblDocSalida" Type="Self.tblDocSalida" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUsuarioCorrespondencia">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblDocSalida">
+        <PropertyRef Name="idDestinatario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUsuarioCorrespondencia_tblCiudadDpto">
+    <End Role="tblCiudadDpto" Type="Self.tblCiudadDpto" Multiplicity="1" />
+    <End Role="tblUsuarioCorrespondencia" Type="Self.tblUsuarioCorrespondencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCiudadDpto">
+        <PropertyRef Name="idCiudad" />
+      </Principal>
+      <Dependent Role="tblUsuarioCorrespondencia">
+        <PropertyRef Name="idCiudad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbCorrespondenciaModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tabla" EntityType="Self.tabla" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblCiudadDpto" EntityType="Self.tblCiudadDpto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDependencia" EntityType="Self.tblDependencia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDocEntrada" EntityType="Self.tblDocEntrada" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDocSalida" EntityType="Self.tblDocSalida" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDocumento" EntityType="Self.tblDocumento" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUsuarioCorrespondencia" EntityType="Self.tblUsuarioCorrespondencia" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tblDocEntrada_tblDocumento" Association="Self.FK_tblDocEntrada_tblDocumento">
+      <End Role="tblDocumento" EntitySet="tblDocumento" />
+      <End Role="tblDocEntrada" EntitySet="tblDocEntrada" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblDocEntrada_tblUsuarioCorrespondencia" Association="Self.FK_tblDocEntrada_tblUsuarioCorrespondencia">
+      <End Role="tblUsuarioCorrespondencia" EntitySet="tblUsuarioCorrespondencia" />
+      <End Role="tblDocEntrada" EntitySet="tblDocEntrada" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblDocSalida_tblDependencia" Association="Self.FK_tblDocSalida_tblDependencia">
+      <End Role="tblDependencia" EntitySet="tblDependencia" />
+      <End Role="tblDocSalida" EntitySet="tblDocSalida" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblDocSalida_tblDocumento" Association="Self.FK_tblDocSalida_tblDocumento">
+      <End Role="tblDocumento" EntitySet="tblDocumento" />
+      <End Role="tblDocSalida" EntitySet="tblDocSalida" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblDocSalida_tblUsuarioCorrespondencia" Association="Self.FK_tblDocSalida_tblUsuarioCorrespondencia">
+      <End Role="tblUsuarioCorrespondencia" EntitySet="tblUsuarioCorrespondencia" />
+      <End Role="tblDocSalida" EntitySet="tblDocSalida" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUsuarioCorrespondencia_tblCiudadDpto" Association="Self.FK_tblUsuarioCorrespondencia_tblCiudadDpto">
+      <End Role="tblCiudadDpto" EntitySet="tblCiudadDpto" />
+      <End Role="tblUsuarioCorrespondencia" EntitySet="tblUsuarioCorrespondencia" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

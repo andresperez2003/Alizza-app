@@ -1,0 +1,44 @@
+﻿@model Documento.Models.ViewModels.DependenciaViewModel
+
+@{
+    ViewBag.Title = "Nueva Dependencia";
+}
+
+
+
+<h2>@ViewBag.Title</h2>
+
+<br />
+
+
+@using (Html.BeginForm("Nuevo", "Dependencia", FormMethod.Post))
+{
+    <div class="row">
+
+        <div class="col-md-12">
+            <div>
+                @Html.LabelFor(d => d.IDDependencia)
+                @Html.TextBoxFor(d => d.IDDependencia, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.IDDependencia, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Dependencia)
+                @Html.TextBoxFor(d => d.Dependencia, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Dependencia, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Nivel)
+                @Html.TextBoxFor(d => d.Nivel, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Nivel, null, new { @class = "red" })
+            </div>
+        </div>
+        <div style="text-align:right;">
+            <input type="submit" value="Guardar" class="btn btn-primary" style="background-color:#222; border-color:#222;" />
+        </div>
+
+
+
+
+    </div>
+
+}
